@@ -1,7 +1,7 @@
 from selenium import webdriver
 import time, os,  datetime, pandas as pd
 
-
+# функция, возвращающая данные с текущей страницы
 def collect_data_from_page():
     data_from_page = []
     for i in range(1, 101):
@@ -46,22 +46,8 @@ for page in range(2, amount_of_pages):
 
 chrome.close()
 
-df = pd.DataFrame(all_data, columns=["ФИО", "Компания", "e-mail", "Моб телефон"])
-
+df = pd.DataFrame(all_data, columns=["Имя", "Эл. почта", "Номер телефона", "Должность и компания"])
 current_date = str(datetime.date.today())
 df.to_csv('Результаты по запросу на вакансию {} за {}.csv'.format(profession, current_date))
-
-# try:
-#     df.to_csv('Результаты по запросу на вакансию {} за {}.csv'.format(profession, current_date))
-#     # with pd.ExcelWriter('Результаты по запросу на вакансию {} за {}.xlsx'.format(profession, current_date)) as writer:
-#     #     df.to_excel(writer)
-# except:
-#     result_name = 'Результаты по запросу на вакансию {} за {}.csv'.format(profession, current_date)
-#     old_csv_file = [el for el in os.listdir() if el.endswith("csv") and result_name in el][0]
-#     print("Такой файл уже имеется, перезаписываю . . . ")
-#     os.remove(old_csv_file)
-#     df.to_csv('Результаты по запросу на вакансию {} за {}.csv'.format(profession, current_date))
-#     # with pd.ExcelWriter('Результаты по запросу на вакансию {} за {}.xlsx'.format(profession, current_date)) as writer:
-#     #     df.to_excel(writer, index=False)
 
 
